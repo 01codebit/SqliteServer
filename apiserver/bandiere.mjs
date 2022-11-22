@@ -14,15 +14,15 @@ export async function flag_route(req, res) {
     });
 
     let sql = `SELECT bandieraImpianto AS _id, bandieraImpianto AS Description FROM anagraficaimpianti GROUP BY bandieraImpianto;`;
-    console.error("[flag_route] query: \"" + sql + "\"");
+    //console.log("[flag_route] query: \"" + sql + "\"");
 
     db.all(sql, [], (err, rows) => {
         if (err) {
             console.error(err.message);
             res.json({status:'error', msg: err.message});
         }
-        // console.error("[flag_route] result: " + JSON.stringify(rows));
-        console.error("[flag_route] found " + rows.length + " results");
+        // console.log("[flag_route] result: " + JSON.stringify(rows));
+        console.log("[flag_route] found " + rows.length + " results");
 
         let result = {};
         result.count = rows.length;

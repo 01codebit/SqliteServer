@@ -14,15 +14,15 @@ export async function prov_route(req, res) {
     });
 
     let sql = `SELECT CAST(idProvincia AS varchar) AS _id, descrizioneProvincia AS Description, regioneProvincia AS CodiceRegione FROM province;`;
-    console.error("[prov_route] query: \"" + sql + "\"");
+    //console.log("[prov_route] query: \"" + sql + "\"");
 
     db.all(sql, [], (err, rows) => {
         if (err) {
             console.error(err.message);
             res.json({status:'error', msg: err.message});
         }
-        // console.error("[prov_route] result: " + JSON.stringify(rows));
-        console.error("[prov_route] found " + rows.length + " results");
+        // console.log("[prov_route] result: " + JSON.stringify(rows));
+        console.log("[prov_route] found " + rows.length + " results");
 
         let result = {};
         result.count = rows.length;

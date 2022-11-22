@@ -16,15 +16,15 @@ export async function erogatori_stats_route(req, res) {
     });
 
     let sql = queryComunale;
-    console.error("[erogatori_stats_route] query: \"" + sql + "\"");
+    //console.log("[erogatori_stats_route] query: \"" + sql + "\"");
 
     db.all(sql, [], (err, rows) => {
         if (err) {
             console.error(err.message);
             res.json({status:'error', msg: err.message});
         }
-        // console.error("[erogatori_stats_route] result: " + JSON.stringify(rows));
-        console.error("[erogatori_stats_route] found " + rows.length + " results");
+        // console.log("[erogatori_stats_route] result: " + JSON.stringify(rows));
+        console.log("[erogatori_stats_route] found " + rows.length + " results");
 
         let result = {};
         result.count = rows.length;
