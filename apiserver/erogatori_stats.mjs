@@ -6,7 +6,7 @@ const queryComunale = `select meseAnnoVendita AS _id, meseAnnoVendita AS MeseAnn
 export async function erogatori_stats_route(req, res) {
 
     /* QUERY */
-    let db = new sqlite3.Database(DB_PATH, sqlite3.OPEN_READWRITE, (err) => {
+    let db = new sqlite3.Database(DB_PATH, sqlite3.OPEN_READONLY, (err) => {
         if (err) {
             console.error('[erogatori_stats_route] connection error: ' + err.message);
         }

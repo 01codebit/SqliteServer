@@ -7,7 +7,7 @@ const queryComunale = `select CAST(idImpianto AS varchar) AS _id, gestoreImpiant
 export async function impianti_route(req, res) {
 
     /* QUERY */
-    let db = new sqlite3.Database(DB_PATH, sqlite3.OPEN_READWRITE, (err) => {
+    let db = new sqlite3.Database(DB_PATH, sqlite3.OPEN_READONLY, (err) => {
         if (err) {
             console.error('[impianti_route] connection error: ' + err.message);
         }
