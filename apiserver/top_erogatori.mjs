@@ -5,13 +5,15 @@ const queryComunale = `select (meseAnnoVendita || fascia || selfService || tipoC
 
 export async function top_erogatori_route(req, res) {
 
+    let start = Date.now();
+
     /* QUERY */
     let db = new sqlite3.Database(DB_PATH, sqlite3.OPEN_READONLY, (err) => {
         if (err) {
             console.error('[top_erogatori_route] connection error: ' + err.message);
         }
         else {
-            console.log('[top_erogatori_route] connected to the database.');
+            console.log('[top_erogatori_route] connected to the database');
         }
     });
 
@@ -54,20 +56,6 @@ export async function top_erogatori_route(req, res) {
             topResult[topListId] = (topList);
         }
 
-        // _id string, Erogatori [], MeseAnno int, FasciaAllarme int
-        // var topErogatori = {};
-        // topErogatori._id = 0;
-        // topErogatori.MeseAnno = 0;
-        // topErogatori.FasciaAllarme = 0;
-        // topErogatori.Erogatori = [];
-
-        // if (rows.length > 0) {
-        //     topErogatori.MeseAnno = rows[0].MeseAnno;
-        //     topErogatori.FasciaAllarme = rows[0].FasciaAllarme;
-        //     topErogatori._id = "" + rows[0].MeseAnnoVendita + rows[0].FasciaAllarme + rows[0].SelfService + rows[0].TipoCarburante + rows[0].CodiceImpianto;
-        // }
-
-
         var topResultArray = [];
         for (var i = 0; i < keys.length; i++)
         {
@@ -85,6 +73,7 @@ export async function top_erogatori_route(req, res) {
         if (err) {
             console.error(err.message);
         }
-        console.log('[top_erogatori_route] close the database connection.');
+        let elapsed = Date.now() - start;
+        console.log('[top_erogatori_route] close the database connection (time elapsed: ' + elapsed/1000 + ' s)');
     });
 }

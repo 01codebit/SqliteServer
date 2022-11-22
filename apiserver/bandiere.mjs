@@ -3,13 +3,15 @@ import { DB_PATH } from '../dbconnection/config.mjs';
 
 export async function flag_route(req, res) {
 
+    let start = Date.now();
+
     /* QUERY */
     let db = new sqlite3.Database(DB_PATH, sqlite3.OPEN_READONLY, (err) => {
         if (err) {
             console.error('[flag_route] connection error: ' + err.message);
         }
         else {
-            console.log('[flag_route] connected to the database.');
+            console.log('[flag_route] connected to the database');
         }
     });
 
@@ -35,6 +37,7 @@ export async function flag_route(req, res) {
         if (err) {
             console.error(err.message);
         }
-        console.log('[flag_route] close the database connection.');
+        let elapsed = Date.now() - start;
+        console.log('[flag_route] close the database connection (time elapsed: ' + elapsed/1000 + ' s)');
     });
 }

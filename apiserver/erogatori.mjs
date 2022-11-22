@@ -5,13 +5,15 @@ const queryComunale = `select (meseAnnoVendita || fascia || selfService || tipoC
 
 export async function erogatori_route(req, res) {
 
+    let start = Date.now();
+
     /* QUERY */
     let db = new sqlite3.Database(DB_PATH, sqlite3.OPEN_READONLY, (err) => {
         if (err) {
             console.error('[erogatori_route] connection error: ' + err.message);
         }
         else {
-            console.log('[erogatori_route] connected to the database.');
+            console.log('[erogatori_route] connected to the database');
         }
     });
 
@@ -37,6 +39,7 @@ export async function erogatori_route(req, res) {
         if (err) {
             console.error(err.message);
         }
-        console.log('[erogatori_route] close the database connection.');
+        let elapsed = Date.now() - start;
+        console.log('[erogatori_route] close the database connection. [elapsed: ' + elapsed/1000 + ' s]');
     });
 }
