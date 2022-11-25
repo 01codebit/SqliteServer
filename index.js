@@ -1,6 +1,6 @@
 import express from 'express';
-import sqlite3 from 'sqlite3';
 import path from 'path';
+import bodyParser from 'body-parser';
 
 import { router as api } from './routes/api.mjs';
 
@@ -12,6 +12,8 @@ const __dirname = path.resolve();
 
 /* APP */
 const app = express();
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json()) 
 
 /* ROUTES */
 //app.use("/", index);
