@@ -1,1 +1,1 @@
-export const DB_PATH = 'D:/W3/Proj/Unity/SogeiCarburanti_LocalData/Database/database.db';
+export const DB_PATH = 'C:/Users/lumas/Documents/UnityProjects/sogeicarburanti_localdata/Database/database.db';

@@ -1,20 +1,13 @@
-import sqlite3 from 'sqlite3';
-import { DB_PATH } from '../dbconnection/config.mjs';
+import { getDatabase, closeConnection } from '../dbconnection/dbmanager.mjs';
 
 export async function com_route(req, res) {
 
     let start = Date.now();
 
-    /* QUERY */
-    let db = new sqlite3.Database(DB_PATH, sqlite3.OPEN_READONLY, (err) => {
-        if (err) {
-            console.error('[com_route] connection error: ' + err.message);
-        }
-        else {
-            console.log('[com_route] connected to the database');
-        }
-    });
+    /* GET CONNECTION */
+    let db = getDatabase();
 
+    /* QUERY */
     let sql = `SELECT CAST(istat AS varchar) AS _id, descrizioneComune AS Description, regioneComune AS CodiceRegione, provinciaComune AS CodiceProvincia FROM comuni;`;
     //console.log("[com_route] query: \"" + sql + "\"");
 
@@ -37,7 +30,12 @@ export async function com_route(req, res) {
         if (err) {
             console.error(err.message);
         }
-        let elapsed = Date.now() - start;
-        console.log('[com_route] close the database connection (time elapsed: ' + elapsed/1000 + ' s)');
     });
+
+
+    /* CLOSE CONNECTION */
+    closeConnection();
+
+    let elapsed = Date.now() - start;
+    console.log('[com_route] close the database connection (time elapsed: ' + elapsed/1000 + ' s)');
 }
