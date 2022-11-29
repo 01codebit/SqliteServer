@@ -6,7 +6,7 @@ import { prov_route } from '../apiserver/province.mjs';
 import { com_route } from '../apiserver/comuni.mjs';
 import { flag_route } from '../apiserver/bandiere.mjs';
 
-import { impianti_route } from '../apiserver/impianti.mjs';
+import { impianti_route } from '../apiserver/impianti2.mjs';
 import { erogatori_route } from '../apiserver/erogatori.mjs';
 import { impianti_stats_route } from '../apiserver/impianti_stats.mjs';
 import { top_erogatori_route } from '../apiserver/top_erogatori.mjs';
