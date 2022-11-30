@@ -12,7 +12,7 @@ async function connectDB()
 {
     if (db) return db;
 
-    console.log("Open database file: " + DB_PATH);
+    console.log("[db_sqlite3.connectDB] open database file: " + DB_PATH);
     await new Promise((resolve, reject) => {
         db = new sqlite3.cached.Database(DB_PATH, sqlite3.OPEN_READONLY, err => {
             if (err) {
@@ -30,24 +30,24 @@ export async function readAllByQuery(query)
 {
     var db = await connectDB();
     
-    // var data = await new Promise((resolve, reject) => {
-    //     db.all(query, [], (err, row) => {
-    //         if (err) {
-    //             console.log(err.message)
-    //             return reject(err);
-    //         }
-    //         resolve(row);
-    //     })
-    // });
+    var data = await new Promise((resolve, reject) => {
+        db.all(query, [], (err, row) => {
+            if (err) {
+                console.log('[db_sqlite3.readAllByQuery] ***ERROR*** message: ' + err.message);
+                return reject(err);
+            }
+            resolve(row);
+        })
+    });
     
-    // return data;
+    return data;
 }
 
 export async function closeDB()
 {
     var _db = db;
     db = undefined;
-    console.log("close database");
+    console.log("[db_sqlite3.closeDB] close database");
     return _db ? new Promise((resolve, reject) => {
         _db.close(err => {
             if (err) reject(err);
